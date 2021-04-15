@@ -1,0 +1,57 @@
+<div class="modal-dialog  modal-dialog-centered " role="document" >
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="container">
+                <div class="card"></div>
+                <div class="card">
+                    <h1 class="title">Iniciar Sesión</h1>
+
+                    {% if form.errors %}
+                    <p>El usuario y password no coinciden. Intentalo nuevamente.</p>
+                    {% endif %}
+
+                    {% if next %}
+                    {% if user.is_authenticated %}
+                    <p>Tu cuenta no tiene acceso a esta pagina. Para continuar,
+                        por favor ingresa con una cuenta que tenga acceso.</p>
+                    {% else %}
+                    {% endif %}
+                    {% endif %}
+
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="input-container">
+                            {{ form.username }}
+                            <!--
+                                <input type="#{type}" id="#{label}" required="required" />
+                            -->
+                            <label for="#{label}">Nombre de usuario</label>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="input-container">
+                            {{ form.password }}
+                            <!--
+                                <input type="#{type}" id="#{label}" required="required" />
+                            -->
+                            <label for="#{label}">Contraseña</label>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="button-container">
+                            <button><span>Ingresar</span></button>
+                        </div>
+                        <div class="footer"><a href="#">¿Olvidaste tu contraseña?</a></div>
+                    </form>
+                    {# Assumes you setup the password_reset view in your URLconf #}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <br><br>
+            <button class="btn btn-danger " type="button" data-dismiss="modal" style="z-index:900;">Cerrar</button>
+            <a href="{% url 'view_pagina_principal' %}" class="btn btn-danger " type="button"> Cancelar</a>
+        </div>
+
+    </div>
+</div>
