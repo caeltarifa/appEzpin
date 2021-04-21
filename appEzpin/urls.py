@@ -19,10 +19,14 @@ from django.conf.urls import url, include
 from django.urls import path, include
 from django.contrib import admin
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from appEzpin.views import view_clasificar_usuario_login
 from appEzpin.views import view_pagina_principal
 
 urlpatterns = [
+    path('amhs/', include('apps.amhsnacional.urls')),
     path('', view_clasificar_usuario_login, name='view_clasificar_usuario_login'),
     path('', view_pagina_principal, name='view_pagina_principal'),
     path('admin/', admin.site.urls),
@@ -34,3 +38,7 @@ urlpatterns = [
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -141,3 +141,5 @@ STATIC_ROOT = '/var/www/nuclear/appEzpin/static/'
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = 'view_clasificar_usuario_login'
 
+MEDIA_URL = '/documents/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'documents')

@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'amhsnacional/m_recibidos/m_recibidos.css' %}">
+  <link rel="stylesheet" href="{% static 'amhsnacional/m_recibidos/m_recibidos.css' %}">
+  <link rel="stylesheet" href="{% static 'amhsnacional/m_nuevos/m_nuevos.css' %}">
+
+    
+{% endblock extra_css %}
+    
+
+
+{% block add_style %}
+<style>
+  #id_grupodestino, #id_dependenciadestino{
+    width: 100%;
+    margin-top: 20px;
+  }
+</style>
+{% endblock add_style %}
+  
+
+
+{% block content_body %}
+
+<section class="m__recibidos" id="m__recibidos">
+    <h1 class="text-center">Mensajes Recibidos</h1>
+    <table id="m_recibidos" class="table table-striped" style="width: 100%;">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Position</th>
+          <th>Office</th>
+          <th>Age</th>
+          <th>Start date</th>
+          <th>Salary</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Tiger Nixon</td>
+          <td>System Architect</td>
+          <td>Edinburgh</td>
+          <td>61</td>
+          <td>2011/04/25</td>
+          <td>$320,800</td>
+        </tr>
+
+        <tr>
+          <td>Tiger Nixon2</td>
+          <td>System Architect2</td>
+          <td>Edinburgh2</td>
+          <td>612</td>
+          <td>2011/04/22</td>
+          <td>$320,8002</td>
+        </tr>
+
+        <tr>
+          <td>Tiger Nixon</td>
+          <td>System Architect</td>
+          <td>Edinburgh</td>
+          <td>61</td>
+          <td>2011/04/25</td>
+          <td>$320,800</td>
+        </tr>
+
+        <tr>
+          <td>Tiger Nixon2</td>
+          <td>System Architect2</td>
+          <td>Edinburgh2</td>
+          <td>612</td>
+          <td>2011/04/22</td>
+          <td>$320,8002</td>
+        </tr>
+
+        <tr>
+          <td>Tiger Nixon</td>
+          <td>System Architect</td>
+          <td>Edinburgh</td>
+          <td>61</td>
+          <td>2011/04/25</td>
+          <td>$320,800</td>
+        </tr>
+
+        <tr>
+          <td>Tiger Nixon2</td>
+          <td>System Architect2</td>
+          <td>Edinburgh2</td>
+          <td>612</td>
+          <td>2011/04/22</td>
+          <td>$320,8002</td>
+        </tr>
+        <tr>
+          <td>Tiger Nixon2</td>
+          <td>System Architect2</td>
+          <td>Edinburgh2</td>
+          <td>612</td>
+          <td>2011/04/22</td>
+          <td>$320,8002</td>
+        </tr>
+        <tr>
+          <td>Tiger Nixon2</td>
+          <td>System Architect2</td>
+          <td>Edinburgh2</td>
+          <td>612</td>
+          <td>2011/04/22</td>
+          <td>$320,8002</td>
+        </tr>
+        <tr>
+          <td>Tiger Nixon2</td>
+          <td>System Architect2</td>
+          <td>Edinburgh2</td>
+          <td>612</td>
+          <td>2011/04/22</td>
+          <td>$320,8002</td>
+        </tr>
+        <tr>
+          <td>Tiger Nixon2</td>
+          <td>System Architect2</td>
+          <td>Edinburgh2</td>
+          <td>612</td>
+          <td>2011/04/22</td>
+          <td>$320,8002</td>
+        </tr>
+        <tr>
+          <td>Tiger Nixon2</td>
+          <td>System Architect2</td>
+          <td>Edinburgh2</td>
+          <td>612</td>
+          <td>2011/04/22</td>
+          <td>$320,8002</td>
+        </tr>
+      </tbody>
+    </table>
+</section>
+
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <section class="m__nuevos" id="m__nuevos">
+    <div id="app">
+      <h1 class="text-center titulo">Nuevo Mensaje</h1>
+      
+      <b-row class="my-1">
+        <b-col sm="2">
+          <label for="asunto" class="titulo__nuevo">DTG:</label>
+        </b-col>
+        <b-col sm="10">
+          {{form.hora_enviado}}
+        </b-col>
+
+        <b-col sm="2">
+          <label for="asunto" class="titulo__nuevo">Adjunto:</label>
+        </b-col>
+        <b-col sm="10">
+          {{form.adjunto}}
+        </b-col>
+        
+
+        <b-col sm="2">
+          <label for="asunto" class="titulo__nuevo">Guardado:</label>
+        </b-col>
+        <b-col sm="10">
+          {{form.guardado}}
+        </b-col>
+
+      </b-row>
+
+
+      <b-row class="my-1">
+        <b-col sm="2">
+          <label for="origen" class="titulo__nuevo">Origen:</label>
+        </b-col>
+        <b-col sm="4">
+          {{form.origen}}
+        </b-col>
+
+        <b-col sm="2">
+          <label for="prioridad" class="titulo__nuevo">Prioridad:</label>
+        </b-col>
+        <b-col sm="4">
+          {{form.prioridad}}
+        </b-col>
+      </b-row>
+
+      <b-row class="my-1">
+        <b-col sm="2">
+          <label for="asunto" class="titulo__nuevo">Asunto:</label>
+        </b-col>
+        <b-col sm="10">
+          {{form.asunto}}
+        </b-col>
+      </b-row>
+
+      <b-row class="my-1">
+        <b-col sm=2>
+          <label for="input-small" class="titulo__nuevo">Grupo Destino:</label>
+        </b-col>
+        <b-col sm="10">
+          {{form.grupo_destino}}
+        </b-col>
+      </b-row>
+
+      <b-row class="my-1">
+        <b-col sm=2>
+          <label for="input-small" class="titulo__nuevo">Dependencia Destino:</label>
+        </b-col>
+        <b-col sm="10">
+          {{form.dependencia_destino}}
+        </b-col>
+      </b-row>
+
+      <b-row class="my-1">
+        <b-col sm="12">
+          {{form.mensaje}}
+        </b-col>
+
+      </b-row>
+
+      <div class="text-right">
+        <b-button variant="primary" type="submit" style="padding: 10px 40px; letter-spacing: 4px;">Guardar</b-button>
+        <b-button type="submit" variant="success" style="padding: 10px 40px; letter-spacing: 4px;">Enviar</b-button>
+      </div>
+
+
+
+
+    </div>
+  </section>
+</form>
+
+
+{% endblock content_body %}
+    
+
+
+{% block extra_js %}
+  <script src="{% static 'amhsnacional/m_recibidos/m_recibidos.js' %}"></script>
+  <script src="{% static 'amhsnacional/m_nuevos/m_nuevos.js' %}"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('.js-example-basic-multiple').select2();
+      $('.js-example-basic-multiple2').select2();
+    });
+  </script>
+
+{% endblock extra_js %}

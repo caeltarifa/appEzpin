@@ -6,7 +6,7 @@ from django.http import HttpResponse
 import json
 from datetime import datetime
 
-from apps.amhsnacional.models import Grupo_ezpin
+#from apps.amhsnacional.models import Grupo_ezpin
 #Usuario_barion
 # Create your views here.
 
@@ -20,7 +20,8 @@ def view_pagina_principal(request):
 def view_clasificar_usuario_login(request):
     if request.user.is_authenticated:
         #metar = Metar_trafico.objects.raw("select * from plan_vuelo_flp_trafico where hora_amhs like '12%%%%' order by id_amhs desc limit 20")
-        return render(request, 'index.html')#, {'metar': metar})
+        return redirect('view_nuevo')#, {'metar': metar})
         #return render(request, 'index.html')
     else:
         return redirect('login')
+
