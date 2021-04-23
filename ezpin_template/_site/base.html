@@ -56,14 +56,14 @@
     </nav>
   </header>
 
-  <div class="content__menu">
-    <li><a href="#m__recibidos"><span class='bx bxs-message-rounded-detail icon1'></span><h4 class="text1">Recibidos</h4></a></li>
-    <li><a href="#m__nuevos"><span class='bx bxs-message-rounded-add icon2'></span><h4 class="text2">Nuevos</h4></a></li>
-    <li><span class='bx bxs-contact icon3'></span><h4 class="text3">Directorio</h4></li>
-    <li><span class='bx bxs-message-rounded-check icon4'></span><h4 class="text4">Enviados</h4></li>
-    <li><span class='bx bxs-save icon5'></span><h4 class="text5">Guardados</h4></li>
-    <li><span class='bx bxs-trash icon6'></span><h4 class="text6">Eliminados</h4></li>
-    <li><a href="#contacto"><span class='bx bxs-info-circle icon7'></span><h4 class="text7">Contacto</h4></a></li>
+  <!-- menu lateral -->
+  <div class="menu__lateral">
+    <a href="#m__nuevos"><li><span class='bx bxs-message-rounded-add icon1'></span><h4 class="texto__l">Nuevos</h4></li></a>
+    <a href="#m__recibidos""><li><span class="bx bxs-message-rounded-detail icon1"></span><h4 class="texto__l">Recibidos</h4></li></a>
+    <a href="#"><li><span class='bx bxs-message-rounded-check icon1'></span><h4 class="texto__l">Enviados</h4></li></a>
+    <a href="#"><li><span class='bx bxs-save icon1'></span><h4 class="texto__l">Guardados</h4></li></a>
+    <a href="#"><li><span class='bx bxs-trash icon1'></span><h4 class="texto__l">Eliminados</h4></li></a>
+    <a href="#m__directorio"><li><span class='bx bxs-contact icon1'></span><h4 class="texto__l">Directorio</h4></li></a>
   </div>
 
   
@@ -80,14 +80,14 @@
 
 <!--   <script src="{% static 'amhsnacional/navbar.js' %}"></script>
  -->
-  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-  <script src="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.js"></script> 
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
+  <!-- <script src="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.js"></script> 
   <script src="https://unpkg.com/vue@2.6.12/dist/vue.min.js"></script>
-  <script src="https://unpkg.com/bootstrap-vue@2.21.2/dist/bootstrap-vue.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-vue@2.21.2/dist/bootstrap-vue.min.js"></script> -->
+  <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
 
   {% block extra_js %}
       

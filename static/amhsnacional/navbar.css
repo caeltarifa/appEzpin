@@ -19,11 +19,10 @@ header .bd-grid{
 .l-header{
   width: 100%;
   position: fixed;
-  border-bottom: 1px solid #fff;
   top: 0;
   left: 0;
   z-index: 100;
-  background: #0e91a1;
+  background: #002c3e;
 }
 .l-header .nav__logo {
   font-size: 15pt;

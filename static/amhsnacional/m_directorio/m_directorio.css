@@ -1,0 +1,67 @@
+.m__directorio{
+  width: 100%;
+  height: 100%;
+  background: #f7f2e5;
+  padding: 70px 20px 0 130px;
+}
+.m__directorio h1{
+  color: #fff;
+  font-weight: #fff;
+}
+.m__directorio label{
+  color: #fff;
+}
+.m__directorio .m__directorio__cont{
+  width: 100%;
+  height: 85%;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 20px;
+  background: #002c3e;
+  margin-top: 20px;
+}
+.m__directorio .btn__grupos,.m__directorio .btn__usuarios{
+  background: #218c74;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 100px;
+  border: 1px solid #218c74;
+}
+.m__directorio .btn__grupos{
+  margin-right: 10px;
+  background: #227093;
+  border: 1px solid #227093;
+}
+.m__directorio .m__usuario, .m__directorio .m__new__grupo{
+  display: none;
+}
+.m__directorio .m__grupos h1,
+.m__directorio .m__usuario h1{
+  text-align: center;
+}
+.m__directorio .m__grupos h1,
+.m__directorio .m__usuario h1{
+  color: #fff;
+}
+.m__directorio .m__grupos table thead th,
+.m__directorio .m__usuario table thead th{
+  color: #b2bec3;
+  font-weight: 900;
+}
+.m__directorio .m__grupos table tbody td,
+.m__directorio .m__usuario table tbody td{
+  color: #fff;
+}
+.m__directorio .m__grupos .contenido a,
+.m__directorio .m__usuario .contenido button{
+  margin-left: 20px;
+}
+.m__directorio .m__grupos .contenido .icon__group,
+.m__directorio .m__usuario .contenido .icon__user{
+  margin-right: 20px;
+  font-size: 50px;
+}
+.form__add_gupo{
+  width: 100%;
+  height: 80%;
+}

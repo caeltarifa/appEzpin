@@ -57,7 +57,7 @@ class Air_mensaje(models.Model):
 
     grupo_destino = models.ManyToManyField(Grupo_ezpin, blank=True)
 
-    dependencia_destino = models.ManyToManyField(Usuario_ezpin, blank=False)
+    dependencia_destino = models.ManyToManyField(Usuario_ezpin, blank=True)
 
     hora_enviado = models.DateTimeField(default=datetime.now, blank=False)
 
