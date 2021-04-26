@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+
+from django.template.response import TemplateResponse
 
 from django.db import models
 from datetime import datetime
 
 import json
+
 
 # Create your views here.
 
@@ -51,22 +54,25 @@ class Formulario(forms.ModelForm):
     grupo_destino = forms.MultipleChoiceField(
             choices=grupos_directorio(),
             widget=forms.SelectMultiple(attrs={'class':'menu__uno', 'id':'id_grupodestino'}),
-            required=True,
+            required=False,
         )
 
     dependencia_destino = forms.MultipleChoiceField(
             choices=dependendencias_directorio(),
             widget=forms.SelectMultiple(attrs={'class':'menu__dos', 'id':'id_dependenciadestino', 'placeholder':'Dependencia destino'}),
-            required=True,
+            required=False,
         )
+
     hora_enviado = forms.DateTimeField(initial=datetime.today)
     adjunto = forms.FileField( )
-    guardado = forms.BooleanField()
+    guardado = forms.BooleanField(required=False)
 
     def __init__(self, user, *args, **kwargs):
         super(Formulario, self).__init__(*args, **kwargs)
-
-        self.fields['origen'].queryset = Usuario_ezpin.objects.filter(designador=user.get_username().split('@')[0])
+        nameuser=user.get_username().split('@')[0]
+        self.fields['origen'].queryset = Usuario_ezpin.objects.filter(designador=nameuser)
+        self.asunto = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'id': 'asunto', 'value':nameuser}))
 
     class Meta:
         model = Air_mensaje
@@ -75,21 +81,24 @@ class Formulario(forms.ModelForm):
 
 
 def view_nuevo(request):
-    if request.method == 'POST':
-        form = Formulario(request.POST, request.FILES)
-        if form.is_valid():
-            #post= form.save(commit=False)
-            # form=Air_mensaje(adjunto=request.FILES['id_adjunto'])
-            form.save()
-            return redirect('view_nuevo')
-        else:
-            print("error en files form")
-    else:
-        #form = Formulario(initial={'asunto': "HOL MNDO",})
-        form = Formulario(request.user)
-        #form.setOrigen("SLLPZTZX")
-    return render(request, 'template_amhsnacional/recibidos_nuevo.html', {'form': form})
+    if request.user.is_authenticated and request.user.is_active:
+        if request.method == 'POST':
+            form = Formulario(request.user,request.POST, request.FILES)
+            if form.is_valid():
+                #post= form.save(commit=False)
+                # form=Air_mensaje(adjunto=request.FILES['id_adjunto'])
+                form.save()
+                return redirect('view_nuevo')
+            else:
+                return render(request, 'template_amhsnacional/m_nuevos.html', {'form': form})
 
+        else:
+            #form = Formulario(initial={'asunto': "HOL MNDO",})
+            form = Formulario(user=request.user)
+            #form.setOrigen("SLLPZTZX")
+        return render(request, 'template_amhsnacional/m_nuevos.html', {'form': form})
+    else:
+        return redirect('login')
 
 def serializarEnviados(msj):
     return {
@@ -157,25 +166,39 @@ def serializarRecibidos(msj):
         'prioridad_id': msj.prioridad_id,  
         'origen_id': msj.origen_id,  
         'usuario_ezpin_id': msj.usuario_ezpin_id,
-        'hora_enviado': msj.hora_enviado    
+        'hora_enviado': str(msj.hora_enviado)    
     }
 
-def api_recididos(request):
-    if request.user.is_authenticated and request.user.is_active and request.user.groups.filter(name='AISNACIONAL').exists():
+def view_recibidos(request):
+    if request.user.is_authenticated and request.user.is_active:
+        return render(request, 'template_amhsnacional/m_recibidos.html')
+        #return HttpResponse(dev olucion, content_type='application/json')
+    else:
+        return redirect('login')
+
+
+
+def view_api_recibidos(request):
+    if request.user.is_authenticated and request.user.is_active:
         #get_abreviatura = str(request.GET.dict()['abreviatura'])
         get_usuario = request.user.username.split('@')[0]
 
         #	--MOSTRAR EL MENSAJE QUE TENGA EL DETINO: USUARIO=SLLPZRZA
         #	--MOSTRAR EL MENSAJE QUE TENGA COMO DESTINO EL USUARIO=SLLPZRZA, QUE ESTA DENTRO DE UN GRUPO 
-        lista_recibidos = Air_mensaje.objects.raw("select distinct(id_airmensaje), asunto, mensaje, prioridad_id, origen_id, usuario_ezpin_id,hora_enviado from ( 	select id_airmensaje,tabmsj.asunto,tabmsj.mensaje, tabmsj.prioridad_id,tabmsj.origen_id,tabuser.usuario_ezpin_id,tabmsj.hora_enviado 	from amhsnacional_air_mensaje as tabmsj 	inner join amhsnacional_air_mensaje_dependencia_destino AS tabuser 	on tabmsj.id_airmensaje = tabuser.air_mensaje_id 	and 	tabuser.usuario_ezpin_id like %(get_usuario)s ) as tab1 union ( 	select id_airmensaje, asunto, mensaje, prioridad_id, origen_id, usuario_ezpin_id,hora_enviado 	from 		(select * from amhsnacional_air_mensaje as tabmsj 		inner join amhsnacional_air_mensaje_grupo_destino as tabgrup 		on tabmsj.id_airmensaje = tabgrup.air_mensaje_id  		) as tabgrup 	inner join amhsnacional_grupo_ezpin_integrantes as tabgrupo_user 	on tabgrup.grupo_ezpin_id = tabgrupo_user.grupo_ezpin_id 	and  	tabgrupo_user.usuario_ezpin_id like %(get_usuario)s ) " , { 'get_usuario' : "'"+get_usuario+"'"} )
+        lista_recibidos = Air_mensaje.objects.raw("select distinct(id_airmensaje), asunto, mensaje, prioridad_id, origen_id, usuario_ezpin_id,hora_enviado from ( 	select id_airmensaje,tabmsj.asunto,tabmsj.mensaje, tabmsj.prioridad_id,tabmsj.origen_id,tabuser.usuario_ezpin_id,tabmsj.hora_enviado 	from amhsnacional_air_mensaje as tabmsj 	inner join amhsnacional_air_mensaje_dependencia_destino AS tabuser 	on tabmsj.id_airmensaje = tabuser.air_mensaje_id 	and 	tabuser.usuario_ezpin_id like %(get_usuario)s ) as tab1 union ( 	select id_airmensaje, asunto, mensaje, prioridad_id, origen_id, usuario_ezpin_id,hora_enviado 	from 		(select * from amhsnacional_air_mensaje as tabmsj 		inner join amhsnacional_air_mensaje_grupo_destino as tabgrup 		on tabmsj.id_airmensaje = tabgrup.air_mensaje_id  		) as tabgrup 	inner join amhsnacional_grupo_ezpin_integrantes as tabgrupo_user 	on tabgrup.grupo_ezpin_id = tabgrupo_user.grupo_ezpin_id 	and  	tabgrupo_user.usuario_ezpin_id like %(get_usuario)s ) order by hora_enviado desc " , { 'get_usuario' : ""+get_usuario+""} )
         
         lista_recibidos = [ serializarRecibidos(msj) for msj in lista_recibidos ]
 
         devolucion = {
+            'get_usuario':get_usuario,
             'lista_recibidos': lista_recibidos,
         }
-        return render(request, 'template_amhsnacional/m_recibidos.html', devolucion)
-        #return HttpResponse(devolucion, content_type='application/json')
+        #devolucion=json.dumps(devolucion)
+        return HttpResponse(json.dumps(devolucion), content_type='application/json')
+        #return JsonResponse(devolucion,status=200)
+        #return TemplateResponse(request, 'template_amhsnacional/m_recibidos.html', devolucion)
+        #return render(request, 'template_amhsnacional/m_recibidos.html', devolucion)
+        #return HttpResponse(dev olucion, content_type='application/json')
     else:
         return redirect('login')
 

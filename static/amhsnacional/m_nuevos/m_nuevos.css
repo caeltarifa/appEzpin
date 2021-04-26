@@ -38,3 +38,6 @@
   font-size: 35px;
   font-weight: bold;
 }
+#id_grupodestino,#id_dependenciadestino{
+  width: 75%;
+}

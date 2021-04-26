@@ -39,15 +39,17 @@ appr = new Vue({
               "copy":	"Copiar",
               "colvis":	"Visibilidad"
             }	
-          }
+          },
+          order:[[ 5, "desc" ]],
         });
       });
     },
     getMsj(){
-      const path = 'http://ezpin.aasana.ga/amhs/recibidos/'
-      axios.get(path,{params: {'usuario': 'SLCBZTZX'}}).then((respuesta) => {
+      const path = 'http://ezpin.aasana.ga/amhs/get_msjs/'
+      axios.get(path).then((respuesta) => {
         this.usuarios = respuesta.data.lista_recibidos
         this.tabla()
+        console.log(this.tabla)
       }).catch((error) => {
         console.log(error)
       });
@@ -57,7 +59,6 @@ appr = new Vue({
 
 $(document).ready(function(){
   $('.btn_mr_refrescar').click(function(){
-    alert('hola');
     location.reload();
     /* window.location.href = window.location.href; */
   });

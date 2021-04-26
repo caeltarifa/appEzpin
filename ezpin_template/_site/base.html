@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +13,7 @@
 
   <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="{% static 'amhsnacional/navbar.css' %}">
-  
+
   <link rel="stylesheet" href="{% static 'amhsnacional/menu_lateral.css' %}">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
@@ -23,19 +24,21 @@
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css">
 
 
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />    
-    {% block extra_css %}
-    {% endblock extra_css %}
-        
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{% static 'amhsnacional/modal.css' %}">
+  {% block extra_css %}
+  {% endblock extra_css %}
+
 
 </head>
 
 {% block add_style %}
-  
+
 {% endblock add_style %}
-  
+
 <body>
-  
+
   <!-- navbar -->
   <header class="l-header">
     <nav class="nav bd-grid">
@@ -47,6 +50,12 @@
         <ul class="nav__list">
           <li class="nav__item"><a href="#inicio" class="nav__link active">Inicio</a></li>
           <li class="nav__item"><a href="#contacto" class="nav__link">Contacto</a></li>
+          <li class="nav__item"><a href="#contacto" class="nav__link">
+              <h7>{{ user.username }}</h7>
+            </a></li>
+          <li class="nav__item"><a href="{% url 'logout' %}" class="nav__link">
+              <h7>Cerrar sesion</h7>
+            </a></li>
         </ul>
       </div>
 
@@ -58,27 +67,57 @@
 
   <!-- menu lateral -->
   <div class="menu__lateral">
-    <a href="#m__nuevos"><li><span class='bx bxs-message-rounded-add icon1'></span><h4 class="texto__l">Nuevos</h4></li></a>
-    <a href="#m__recibidos""><li><span class="bx bxs-message-rounded-detail icon1"></span><h4 class="texto__l">Recibidos</h4></li></a>
-    <a href="#"><li><span class='bx bxs-message-rounded-check icon1'></span><h4 class="texto__l">Enviados</h4></li></a>
-    <a href="#"><li><span class='bx bxs-save icon1'></span><h4 class="texto__l">Guardados</h4></li></a>
-    <a href="#"><li><span class='bx bxs-trash icon1'></span><h4 class="texto__l">Eliminados</h4></li></a>
-    <a href="#m__directorio"><li><span class='bx bxs-contact icon1'></span><h4 class="texto__l">Directorio</h4></li></a>
+    <a href="{% url 'view_nuevo' %}">
+      <li><span class='bx bxs-message-rounded-add icon1'></span>
+        <h4 class="texto__l">Nuevos</h4>
+      </li>
+    </a>
+    <!-- <a href="#m__nuevos"><li><span class='bx bxs-message-rounded-add icon1'></span><h4 class="texto__l">Nuevos</h4></li></a> -->
+    <a href="{% url 'view_recibidos' %}">
+      <li><span class="bx bxs-message-rounded-detail icon1"></span>
+        <h4 class="texto__l">Recibidos</h4>
+      </li>
+    </a>
+    <a href="#">
+      <li><span class='bx bxs-message-rounded-check icon1'></span>
+        <h4 class="texto__l">Enviados</h4>
+      </li>
+    </a>
+    <a href="#">
+      <li><span class='bx bxs-save icon1'></span>
+        <h4 class="texto__l">Guardados</h4>
+      </li>
+    </a>
+    <a href="{% url 'view_recibidos' %}">
+      <li><span class='bx bxs-trash icon1'></span>
+        <h4 class="texto__l">Eliminados</h4>
+      </li>
+    </a>
+    <a href="#m__directorio">
+      <li><span class='bx bxs-contact icon1'></span>
+        <h4 class="texto__l">Directorio</h4>
+      </li>
+    </a>
   </div>
 
-  
+
   {% block content_body %}
-      
+
+
+
+
   {% endblock content_body %}
-      
 
 
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-  
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<!--   <script src="{% static 'amhsnacional/navbar.js' %}"></script>
+  <!--   <script src="{% static 'amhsnacional/navbar.js' %}"></script>
  -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -90,9 +129,10 @@
   <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
 
   {% block extra_js %}
-      
+
   {% endblock extra_js %}
-  
-      
+
+
 </body>
+
 </html>

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'amhsnacional/m_nuevos/m_nuevos.css' %}">
+{% endblock extra_css %}
+
+{% block content_body %}
+
+<!-- ----- -----  Contenido Mensajes Nuevos  ----- ----- -->
+
+<section class="m__nuevos" id="m__nuevos">
+  <div class="contenido__mnuevo">
+    
+   
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mt-3 row">
+        <label for="dtg" class="col-sm-1 col-form-label">DTG</label>
+        <div class="col-sm-5">
+          {{form.hora_enviado}}
+        </div>
+
+        <label for="adjunto" class="col-sm-1 col-form-label">Adjunto</label>
+        <div class="col-sm-5">
+          {{form.adjunto}}
+        </div>
+      </div>
+
+      <div class="mt-1 row">
+        <label for="origen" class="col-sm-1 col-form-label">Origen</label>
+        <div class="col-sm-5">
+          {{form.origen}}
+        </div>
+
+        <label for="prioridad" class="col-sm-1 col-form-label">Prioridad</label>
+        <div class="col-sm-5">
+          {{form.prioridad}}
+        </div>
+      </div>
+
+      <div class="mt-1 row">
+        <label for="asunto" class="col-sm-1 col-form-label">Asunto</label>
+        <div class="col-sm-10">
+          {{form.asunto}}
+        </div>
+
+        <div class="col-sm-1 form-check">
+          {{form.guardado}}
+        </div>
+      </div>
+
+      <div class="mt-1">
+        <label for="g_destino" class="col-sm-2 col-form-label">Grupo Destino</label>
+        {{form.grupo_destino}}
+      </div>
+
+      <div class="mt-1">
+        <label for="d_destino" class="col-sm-2 col-form-label">Dependencia Destino</label>
+        {{form.dependencia_destino}}
+      </div>
+
+      <div class="mt-1">
+        <div class="col-sm-12 form-check">
+          {{form.mensaje}}
+        </div>
+      </div>
+
+      <div class="mt-1 row">
+        <h1 class="text-start titulo col-sm-6">Nuevo Mensaje</h1>
+        <div class="col-sm-5 text-end">
+          <button class="btn btn-primary" title="Enviar" type="submit" style="padding: 10px 40px; letter-spacing: 4px;"><i class='bx bx-send'></i>Enviar</button>
+          <button class="btn btn-danger" title="Guardar"><i class='bx bxs-save' ></i>Guardar</button>
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+</section>
+{% endblock content_body %}
+
+
+{% block extra_js %}
+  <script src="{% static 'amhsnacional/m_nuevos/m_nuevos.js' %}"></script>
+{% endblock extra_js %}

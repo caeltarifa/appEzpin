@@ -10,6 +10,7 @@ from datetime import datetime
 #Usuario_barion
 # Create your views here.
 
+
 def view_pagina_principal(request):
     if request.user.is_authenticated:
         return redirect('login')
@@ -20,7 +21,7 @@ def view_pagina_principal(request):
 def view_clasificar_usuario_login(request):
     if request.user.is_authenticated:
         #metar = Metar_trafico.objects.raw("select * from plan_vuelo_flp_trafico where hora_amhs like '12%%%%' order by id_amhs desc limit 20")
-        return redirect('view_nuevo')#, {'metar': metar})
+        return redirect('view_recibidos')#, {'metar': metar})
         #return render(request, 'index.html')
     else:
         return redirect('login')

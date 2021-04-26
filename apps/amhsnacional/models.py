@@ -66,13 +66,13 @@ class Air_mensaje(models.Model):
 
     adjunto = models.FileField(upload_to='documents-%Y-%m-%d/', blank=True)
 
-    guardado = models.BooleanField(default=False)
+    guardado = models.BooleanField(default=False,blank=True, null=True)
 
-    eliminado = models.BooleanField(default=False)
+    eliminado = models.BooleanField(default=False,blank=True, null=True)
 
-    archivado = models.BooleanField(default=False)
+    archivado = models.BooleanField(default=False,blank=True, null=True)
 
-    enviado = models.BooleanField(default=False)
+    enviado = models.BooleanField(default=False,blank=True, null=True)
 
 
     def __str__(self):
