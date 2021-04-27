@@ -6,10 +6,10 @@ class Usuario_ezpin(models.Model):
     designador = models.CharField(primary_key=True, max_length=8)
     descripcion = models.CharField(max_length=85)
     icao_amhs = models.CharField(max_length=100)
-    #prefijo = models.CharField(max_length=100)
 
     def __str__(self):
         return '{}-{}'.format(self.icao_amhs, self.designador)
+        #return '{}-{}'.format(self.icao_amhs, self.designador)
 
     class Meta:
         ordering = ['designador']
@@ -64,7 +64,7 @@ class Air_mensaje(models.Model):
     visto = models.BooleanField(default=False)
     hora_visto = models.DateTimeField(blank=True, null=True)
 
-    adjunto = models.FileField(upload_to='documents-%Y-%m-%d/', blank=True)
+    adjunto = models.FileField(upload_to='documents-%Y-%m-%d/', blank=True, null=True)
 
     guardado = models.BooleanField(default=False,blank=True, null=True)
 
@@ -82,7 +82,7 @@ class Air_mensaje(models.Model):
         ordering = ['-id_airmensaje']
 
 class Directorio(models.Model):
-    id_directorio = models.OneToOneField(
+    directorio_usuario = models.OneToOneField(
         Usuario_ezpin,
         related_name='directorio_user',
         on_delete=models.PROTECT,
@@ -90,6 +90,6 @@ class Directorio(models.Model):
     )
     grupo = models.ManyToManyField(Grupo_ezpin)
     def __str__(self):
-        return '{} - {}'.format(self.id_directorio, self.id_directorio.descripcion)
+        return '{} - {}'.format(self.directorio_usuario, self.directorio_usuario.designador, self.directorio_usuario.descripcion)
     class Meta:
-        ordering = ['-id_directorio']
+        ordering = ['-directorio_usuario']
