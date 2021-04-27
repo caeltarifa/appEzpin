@@ -21,7 +21,7 @@ from .models import Prioridad
 
 
 def grupos_directorio():
-    grupos = Grupo_ezpin.objects.raw('select * from amhsnacional_grupo_ezpin') # Grupo_ezpin.objects.all()
+    grupos = Grupo_ezpin.objects.all() # Grupo_ezpin.objects.all()
     lista = []
     for i in grupos:
         lista.append((i.id_grupo, i.nombre_grupo))
@@ -103,9 +103,10 @@ class Formulario(forms.ModelForm):
         super(Formulario, self).__init__(*args, **kwargs)
         nameuser=user.get_username().split('@')[0]
         self.fields['origen'].queryset = Usuario_ezpin.objects.filter(designador=nameuser)
-        self.asunto = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control', 'id': 'asunto', 'value':nameuser}))
-
+        self.fields['grupo_destino'].choices = grupos_directorio()
+        self.fields['dependencia_destino'].choices = dependendencias_directorio()
+        
+        
     class Meta:
         model = Air_mensaje
         fields = ('origen', 'asunto', 'prioridad', 'grupo_destino',
